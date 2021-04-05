@@ -7,6 +7,8 @@
 
 import UIKit
 import Firebase
+import CoreML
+import Vision
 
 class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -91,6 +93,24 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         imageView.image = image
         classificationLabel.text = "Object on image is \nclassified as \nMammal.\nConfidence: 95.99%"
         
+    }
+    
+    func processClassifications(for request: VNRequest, error: Error?) {
+        guard let classifications = request.results as? [VNClassificationObservation] else {
+            self.classificationLabel.text = "Unable to classify image.\n\(error?.localizedDescription ?? "Error")"
+            return
+        }
+        
+        if classifications.isEmpty {
+            self.classificationLabel.text = "Nothing recognized.\nPlease try again."
+        } else {
+            let topClassifications = classifications.prefix(2)
+            let descriptions = topClassifications.map { classification in
+                return String(format: "%.2f", classification.confidence * 100) + "% – " + classification.identifier
+            }
+            
+            self.classificationLabel.text = "Classifications:\n" + descriptions.joined(separator: "\n")
+        }
     }
     
 }
