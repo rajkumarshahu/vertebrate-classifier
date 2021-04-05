@@ -16,8 +16,21 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     
     @IBOutlet weak var imageView: UIImageView!
     
-    
     @IBOutlet weak var classificationLabel: UILabel!
+    
+    lazy var classificationRequest: VNCoreMLRequest = {
+        do {
+            let model = try VNCoreMLModel(for: VertebrateClassifier().model)
+            
+            let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
+                self.processClassifications(for: request, error: error)
+            })
+            request.imageCropAndScaleOption = .centerCrop
+            return request
+        } catch {
+            fatalError("Failed to load Core ML Model: \(error)")
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,9 +102,9 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
-        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {return}
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
         imageView.image = image
-        classificationLabel.text = "Object on image is \nclassified as \nMammal.\nConfidence: 95.99%"
+        updateClassifications(for: image)
         
     }
     
@@ -106,10 +119,27 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         } else {
             let topClassifications = classifications.prefix(2)
             let descriptions = topClassifications.map { classification in
-                return String(format: "%.2f", classification.confidence * 100) + "% – " + classification.identifier
+                return classification.identifier + " with " + String(format: "%.2f", classification.confidence * 100) + "% Confidence"
             }
             
-            self.classificationLabel.text = "Classifications:\n" + descriptions.joined(separator: "\n")
+            self.classificationLabel.text = "The vertebrate on image is classified as:\n" + descriptions.joined(separator: "\n")
+        }
+    }
+    
+    func updateClassifications(for image: UIImage) {
+        classificationLabel.text = "Classifying..."
+        
+        guard let orientation = CGImagePropertyOrientation(rawValue: UInt32(image.imageOrientation.rawValue)),
+            let ciImage = CIImage(image: image) else {
+            print("Something went wrong...\nPlease try again.")
+            return
+        }
+        
+        let handler = VNImageRequestHandler(ciImage: ciImage, orientation: orientation)
+        do {
+            try handler.perform([classificationRequest])
+        } catch {
+            print("Failed to perform classification: \(error.localizedDescription)")
         }
     }
     
