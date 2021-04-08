@@ -19,14 +19,18 @@ class HistoryCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
     }
 
-    func configureCell(history: History) {
-        classifiedByLabel.text = "Classified by: " + history.classifiedBy
-        classifiedAsLabel.text = "Classified as: " + history.classifiedAs
-        confidenceLabel.text = "Confidence: " + String(history.confidence) + " %"
-        classifiedOnLabel.text = "Classified on: " + history.classifiedOn
+    func configureCell(log: Log) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm E, d MMM y"
+        let classifiedOnStr = "\(dateFormatter.string(from: NSDate() as Date))"
+        
+        classifiedByLabel.text = "Classified by: " + log.classifiedBy
+        classifiedAsLabel.text = "Classified as: " + log.classifiedAs
+        confidenceLabel.text = "Confidence: " + String(log.confidence) + " %"
+        classifiedOnLabel.text = classifiedOnStr
     }
     
 

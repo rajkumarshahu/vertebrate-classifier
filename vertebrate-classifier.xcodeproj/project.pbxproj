@@ -15,7 +15,9 @@
 		EB15D044260C23E3002ADD09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB15D043260C23E3002ADD09 /* Assets.xcassets */; };
 		EB15D047260C23E3002ADD09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB15D045260C23E3002ADD09 /* LaunchScreen.storyboard */; };
 		EB15D050260C24B1002ADD09 /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB15D04F260C24B1002ADD09 /* LoginStoryboard.storyboard */; };
-		EB18125A26194B4300B4972F /* VertebrateClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EB18125926194B4300B4972F /* VertebrateClassifier.mlmodel */; };
+		EB3734A9261E9AF100A71638 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3734A8261E9AF100A71638 /* UserService.swift */; };
+		EB3734AC261E9EFC00A71638 /* LogsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3734AB261E9EFC00A71638 /* LogsModel.swift */; };
+		EB92C50F261F853300B4113E /* LogDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB92C50E261F853300B4113E /* LogDataSet.swift */; };
 		EBCD7C5D260D04B400D87932 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBCD7C5C260D04B400D87932 /* GoogleService-Info.plist */; };
 		EBCD7C7D260D0E4A00D87932 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCD7C7C260D0E4A00D87932 /* LoginVC.swift */; };
 		EBCD7C81260D0E6100D87932 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCD7C80260D0E6100D87932 /* RegisterVC.swift */; };
@@ -25,6 +27,8 @@
 		EBD6EB8C260FE84F008F9062 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6EB8B260FE84E008F9062 /* HistoryCell.swift */; };
 		EBD6EB92260FEAFB008F9062 /* HistoryDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6EB91260FEAFB008F9062 /* HistoryDataSet.swift */; };
 		EBD6EB95260FEB8F008F9062 /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD6EB94260FEB8F008F9062 /* HistoryModel.swift */; };
+		EBEF2CD3261DFC9B0099CFE4 /* VertebrateClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EBEF2CD2261DFC9B0099CFE4 /* VertebrateClassifier.mlmodel */; };
+		EBEF2CF5261E92490099CFE4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEF2CF4261E92490099CFE4 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +44,9 @@
 		EB15D046260C23E3002ADD09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB15D048260C23E3002ADD09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB15D04F260C24B1002ADD09 /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
-		EB18125926194B4300B4972F /* VertebrateClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = VertebrateClassifier.mlmodel; sourceTree = "<group>"; };
+		EB3734A8261E9AF100A71638 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		EB3734AB261E9EFC00A71638 /* LogsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsModel.swift; sourceTree = "<group>"; };
+		EB92C50E261F853300B4113E /* LogDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDataSet.swift; sourceTree = "<group>"; };
 		EBCD7C5C260D04B400D87932 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EBCD7C7C260D0E4A00D87932 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		EBCD7C80260D0E6100D87932 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
@@ -50,6 +56,8 @@
 		EBD6EB8B260FE84E008F9062 /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		EBD6EB91260FEAFB008F9062 /* HistoryDataSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDataSet.swift; sourceTree = "<group>"; };
 		EBD6EB94260FEB8F008F9062 /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
+		EBEF2CD2261DFC9B0099CFE4 /* VertebrateClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = VertebrateClassifier.mlmodel; sourceTree = "<group>"; };
+		EBEF2CF4261E92490099CFE4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +110,7 @@
 		EB15D039260C23E0002ADD09 /* vertebrate-classifier */ = {
 			isa = PBXGroup;
 			children = (
-				EB18125926194B4300B4972F /* VertebrateClassifier.mlmodel */,
+				EBEF2CD2261DFC9B0099CFE4 /* VertebrateClassifier.mlmodel */,
 				EBD6EB9A26101A7C008F9062 /* Storyboards */,
 				EBD6EB9926101A62008F9062 /* Data */,
 				EBD6EB9726101A17008F9062 /* Models */,
@@ -114,6 +122,7 @@
 				EB15D043260C23E3002ADD09 /* Assets.xcassets */,
 				EBCD7C5C260D04B400D87932 /* GoogleService-Info.plist */,
 				EB15D048260C23E3002ADD09 /* Info.plist */,
+				EB3734A8261E9AF100A71638 /* UserService.swift */,
 			);
 			path = "vertebrate-classifier";
 			sourceTree = "<group>";
@@ -134,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				EBD6EB94260FEB8F008F9062 /* HistoryModel.swift */,
+				EBEF2CF4261E92490099CFE4 /* User.swift */,
+				EB3734AB261E9EFC00A71638 /* LogsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				EBD6EB91260FEAFB008F9062 /* HistoryDataSet.swift */,
+				EB92C50E261F853300B4113E /* LogDataSet.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -280,10 +292,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB3734A9261E9AF100A71638 /* UserService.swift in Sources */,
+				EBEF2CF5261E92490099CFE4 /* User.swift in Sources */,
 				EB15D03F260C23E0002ADD09 /* HomeVC.swift in Sources */,
-				EB18125A26194B4300B4972F /* VertebrateClassifier.mlmodel in Sources */,
+				EBEF2CD3261DFC9B0099CFE4 /* VertebrateClassifier.mlmodel in Sources */,
 				EBCD7C84260D139800D87932 /* Extensions.swift in Sources */,
+				EB3734AC261E9EFC00A71638 /* LogsModel.swift in Sources */,
 				EB15D03B260C23E0002ADD09 /* AppDelegate.swift in Sources */,
+				EB92C50F261F853300B4113E /* LogDataSet.swift in Sources */,
 				EBD6EB8C260FE84F008F9062 /* HistoryCell.swift in Sources */,
 				EBCD7C7D260D0E4A00D87932 /* LoginVC.swift in Sources */,
 				EBD6EB95260FEB8F008F9062 /* HistoryModel.swift in Sources */,

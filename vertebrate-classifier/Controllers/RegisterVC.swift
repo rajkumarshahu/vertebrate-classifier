@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class RegisterVC: UIViewController {
     
@@ -20,7 +21,6 @@ class RegisterVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         passwordTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         confirmPassTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
@@ -73,12 +73,29 @@ class RegisterVC: UIViewController {
                 Auth.auth().handleFireAuthError(error: error, vc: self)
                 return
             }
-            
-            self.activityIndicator.stopAnimating()
-            self.dismiss(animated: true, completion: nil)
-            
+           
+            guard let firUser = result?.user else { return }
+            let classifierUser = User.init(id: firUser.uid, email: email, username: username)
+            self.createFirestoreUser(user: classifierUser)
         }
-        
     }
     
+    func createFirestoreUser(user: User) {
+        // Step 1: Create document reference
+        let newUserRef = Firestore.firestore().collection("users").document(user.id)
+        
+        // Step 2: Create model data
+        let data = User.modelToData(user: user)
+        
+        // Step 3: Upload to Firestore.
+        newUserRef.setData(data) { (error) in
+            if let error = error {
+                Auth.auth().handleFireAuthError(error: error, vc: self)
+                debugPrint("Error signing in: \(error.localizedDescription)")
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+            self.activityIndicator.stopAnimating()
+        }
+    }
 }

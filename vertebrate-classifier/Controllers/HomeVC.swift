@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 import CoreML
 import Vision
 
@@ -18,9 +19,11 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     
     @IBOutlet weak var classificationLabel: UILabel!
     
+    var logs = [Log]()
+    
     lazy var classificationRequest: VNCoreMLRequest = {
         do {
-            let model = try VNCoreMLModel(for: VertebrateClassifier().model)
+            let model = try VNCoreMLModel(for: VertebrateClassifier(configuration: .init()).model)
             
             let request = VNCoreMLRequest(model: model, completionHandler: { (request, error) in
                 self.processClassifications(for: request, error: error)
@@ -41,6 +44,9 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         
         if  (Auth.auth().currentUser != nil)  {
             loginOutBtn.title = "Logout"
+            if UserService.userListener == nil {
+                UserService.getCurrentUser()
+            }
         } else {
             loginOutBtn.title = "Login"
         }
@@ -53,6 +59,13 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         present(controller, animated: true, completion: nil)
         
     }
+    
+//    @IBAction func saveButtonClicked(_ sender: Any) {
+//        let userLog = Log.init(id: "", classifiedBy: "", classifiedAs: "Mammal", confidence: 99.99, classifiedOn: Timestamp())
+//        createFirestoreLog(log: userLog)
+//
+//    }
+//
     
     @IBAction func loginOutClicked(_ sender: Any) {
         
@@ -130,7 +143,7 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         classificationLabel.text = "Classifying..."
         
         guard let orientation = CGImagePropertyOrientation(rawValue: UInt32(image.imageOrientation.rawValue)),
-            let ciImage = CIImage(image: image) else {
+              let ciImage = CIImage(image: image) else {
             print("Something went wrong...\nPlease try again.")
             return
         }
@@ -143,5 +156,22 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         }
     }
     
+    
+    func createFirestoreLog(log: Log) {
+        // Step 1: Create document reference
+        let newLogRef = Firestore.firestore().collection("logs").document(log.id)
+        
+        // Step 2: Create model data
+        let data = Log.modelToData(log: log)
+        
+        // Step 3: Upload to Firestore.
+        newLogRef.setData(data) { (error) in
+            if let error = error {
+                print("Error writing document: \(error)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
 }
 
