@@ -6,41 +6,31 @@
 //
 
 import Foundation
-import FirebaseFirestore
-
-struct Log {
-    var id: String
-    var classifiedBy: String
-    var classifiedAs: String
-    var confidence: Double
-    var classifiedOn: Timestamp
+class LogsModel: NSObject {
     
-    init(id: String, classifiedBy: String, classifiedAs: String, confidence: Double, classifiedOn: Timestamp = Timestamp() ) {
-        self.id = id
-        self.classifiedBy = classifiedBy
-        self.classifiedAs = classifiedAs
-        self.confidence = confidence
-        self.classifiedOn = classifiedOn
+    // var id: String
+    var classifierName: String
+    var classifiedDate: String
+    var classifiedDescription : String
+    //var classifiedOn: Timestamp
+    
+    init(classifierName: String, classifiedDate: String, classifiedDescription: String ) {
+        // self.id = id
+        self.classifierName = classifierName
+        self.classifiedDate = classifiedDate
+        self.classifiedDescription = classifiedDescription
+        //self.classifiedOn = classifiedOn
     }
     
-    init(data: [String: Any]) {
-                id = data["id"] as? String ?? ""
-                classifiedBy = data["classifiedBy"] as? String ?? ""
-                classifiedAs = data["classifiedAs"] as? String ?? ""
-                confidence = data["confidence"] as? Double ?? 0.0
-                classifiedOn = data["classifiedOn"] as? Timestamp ?? Timestamp()
+    init(key : String, todo: NSDictionary) {
+        //  id = data["id"] as? String ?? ""
+        classifierName = todo["classifierName"] as? String ?? ""
+        classifiedDate = todo["classifiedDate"] as? String ?? ""
+        classifiedDescription = todo["classifiedDescription"] as? String ?? ""
+        // classifiedOn = data["classifiedOn"] as? Timestamp ?? Timestamp()
     }
     
-    static func modelToData(log: Log) -> [String: Any] {
-        
-        let data : [String: Any] = [
-            "id" : log.id,
-            "classifiedBy" : log.classifiedBy,
-            "classifiedAs" : log.classifiedAs,
-            "confidence" : log.confidence,
-            "classifiedOn" : log.classifiedOn
-        
-        ]
-        return data
+    convenience override init() {
+        self.init(classifierName: "", classifiedDate: "", classifiedDescription: "" )
     }
 }

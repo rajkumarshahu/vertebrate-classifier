@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import FirebaseFirestore
 
 class RegisterVC: UIViewController {
@@ -18,8 +19,13 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var passCheckImg: UIImageView!
     @IBOutlet weak var confirmPassCheckImg: UIImageView!
+    
+    var ref: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
         
         passwordTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         confirmPassTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
@@ -73,9 +79,12 @@ class RegisterVC: UIViewController {
                 Auth.auth().handleFireAuthError(error: error, vc: self)
                 return
             }
-           
+            
             guard let firUser = result?.user else { return }
             let classifierUser = User.init(id: firUser.uid, email: email, username: username)
+            
+            self.ref.child("users").child(firUser.uid).child("classifierName").setValue(username)
+            
             self.createFirestoreUser(user: classifierUser)
         }
     }

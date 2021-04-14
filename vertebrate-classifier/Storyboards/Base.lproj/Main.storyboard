@@ -141,27 +141,21 @@
                                                                 <rect key="frame" x="16" y="16" width="342" height="96"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classified by: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRN-7I-P3b">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="148.5" height="9"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="148.5" height="18.5"/>
                                                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classified as: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v01-8X-K5S">
-                                                                        <rect key="frame" x="0.0" y="29" width="147.5" height="9"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classified as: " lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v01-8X-K5S">
+                                                                        <rect key="frame" x="0.0" y="38.5" width="147.5" height="19"/>
                                                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confidence:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mit-JN-iQs">
-                                                                        <rect key="frame" x="0.0" y="58" width="123" height="9"/>
+                                                                        <rect key="frame" x="0.0" y="77.5" width="123" height="18.5"/>
                                                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classified on: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLq-eI-R6K">
-                                                                        <rect key="frame" x="0.0" y="87" width="151" height="9"/>
-                                                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="20"/>
-                                                                        <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                 </subviews>
@@ -202,7 +196,6 @@
                                         <connections>
                                             <outlet property="classifiedAsLabel" destination="v01-8X-K5S" id="ocS-i1-dIA"/>
                                             <outlet property="classifiedByLabel" destination="MRN-7I-P3b" id="PjD-FV-mN1"/>
-                                            <outlet property="classifiedOnLabel" destination="NLq-eI-R6K" id="PUn-0u-BEM"/>
                                             <outlet property="confidenceLabel" destination="mit-JN-iQs" id="YwV-ef-KdX"/>
                                         </connections>
                                     </tableViewCell>

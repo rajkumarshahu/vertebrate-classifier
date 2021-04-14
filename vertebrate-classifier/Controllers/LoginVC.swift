@@ -25,14 +25,12 @@ class LoginVC: UIViewController {
     @IBAction func loginClicked(_ sender: Any) {
         
         guard let email = emailTxt.text , email.isNotEmpty ,
-            let password = passTxt.text , password.isNotEmpty else {
-                simpleAlert(title: "Error", msg: "Please fill out all fields.")
-                return
+              let password = passTxt.text , password.isNotEmpty else {
+            simpleAlert(title: "Error", msg: "Please fill out all fields.")
+            return
         }
-        
         activityIndicator.startAnimating()
-        
-        
+  
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             
             if let error = error {
@@ -48,7 +46,6 @@ class LoginVC: UIViewController {
             self.dismiss(animated: true, completion: nil)
             
             UIViewController().modalPresentationStyle = .fullScreen
-
         }
     }
     

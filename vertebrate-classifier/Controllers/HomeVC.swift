@@ -7,20 +7,23 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 import FirebaseFirestore
 import CoreML
 import Vision
 
 class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var ref: DatabaseReference!
+    
+    var userId: String = ""
+    
     @IBOutlet weak var loginOutBtn: UIBarButtonItem!
     
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var classificationLabel: UILabel!
-    
-    var logs = [Log]()
-    
+
     lazy var classificationRequest: VNCoreMLRequest = {
         do {
             let model = try VNCoreMLModel(for: VertebrateClassifier(configuration: .init()).model)
@@ -37,6 +40,8 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
         
     }
     
@@ -59,14 +64,7 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         present(controller, animated: true, completion: nil)
         
     }
-    
-//    @IBAction func saveButtonClicked(_ sender: Any) {
-//        let userLog = Log.init(id: "", classifiedBy: "", classifiedAs: "Mammal", confidence: 99.99, classifiedOn: Timestamp())
-//        createFirestoreLog(log: userLog)
-//
-//    }
-//
-    
+ 
     @IBAction func loginOutClicked(_ sender: Any) {
         
         if  (Auth.auth().currentUser != nil) {
@@ -130,10 +128,33 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
         if classifications.isEmpty {
             self.classificationLabel.text = "Nothing recognized.\nPlease try again."
         } else {
+            
+            
             let topClassifications = classifications.prefix(2)
             let descriptions = topClassifications.map { classification in
                 return classification.identifier + " with " + String(format: "%.2f", classification.confidence * 100) + "% Confidence"
             }
+            let user = Auth.auth().currentUser
+            
+            userId = user!.uid
+            
+            print("Supriya login\(userId)")
+            
+            let date = Date()
+            
+            let df = DateFormatter()
+            
+            df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            let dateString = df.string(from: date)
+
+            print("Supriya \(descriptions[0])")
+            
+            print("Supriya \(dateString)")
+            
+            ref.child("users").child(userId).child("classifiedDate").setValue(dateString)
+            
+            ref.child("users").child(userId).child("classifiedDescription").setValue(descriptions[0])
             
             self.classificationLabel.text = "The vertebrate on image is classified as:\n" + descriptions.joined(separator: "\n")
         }
@@ -155,23 +176,6 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationCon
             print("Failed to perform classification: \(error.localizedDescription)")
         }
     }
-    
-    
-    func createFirestoreLog(log: Log) {
-        // Step 1: Create document reference
-        let newLogRef = Firestore.firestore().collection("logs").document(log.id)
-        
-        // Step 2: Create model data
-        let data = Log.modelToData(log: log)
-        
-        // Step 3: Upload to Firestore.
-        newLogRef.setData(data) { (error) in
-            if let error = error {
-                print("Error writing document: \(error)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-    }
+
 }
 

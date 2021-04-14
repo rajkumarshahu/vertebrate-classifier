@@ -9,6 +9,7 @@ target 'vertebrate-classifier' do
 
 	pod 'Firebase/Core'
 	pod 'Firebase/Auth'
+	pod 'Firebase/Database'
 	pod 'IQKeyboardManagerSwift'
 	pod 'Firebase/Firestore'
 	pod 'Firebase/Storage'

@@ -14,7 +14,7 @@ let UserService = _UserService()
 final class _UserService {
  
     var user = User()
-    var logs = [Log]()
+//    var logs = [Log]()
     let auth = Auth.auth()
     let db = Firestore.firestore()
     var userListener : ListenerRegistration? = nil
@@ -48,8 +48,8 @@ final class _UserService {
             }
             
             snap?.documents.forEach({ (document) in
-                let log = Log.init(data: document.data())
-                self.logs.append(log)
+//                let log = Log.init(data: document.data())
+//                self.logs.append(log)
             })
         })
     }
